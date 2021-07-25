@@ -7,14 +7,14 @@ $(document).ready(onReady);
 
 function onReady() {
     console.log('so ready!');
-    
-    $('#calcForm').on('submit', submitForm)
+    $('#submitBtn').on('click', addItem);
+    $('#deleteBtn').on('click', deleteItem);
 }
 
-function submitForm(event) {
-    console.log('in submitForm');
+function addItem() {
+    console.log('in addItem');
 
-    event.preventDefault();
+    // event.preventDefault();
         
     // storing info into employee object
 
@@ -25,6 +25,8 @@ function submitForm(event) {
 
     employeeInfo.push(employee);
 
+    console.log(employeeInfo);
+    
     $('input').val('');
     $('#firstName').focus();
 
@@ -36,7 +38,7 @@ function submitForm(event) {
     }
     else {
         $('#totalCost').text(totalCost.toFixed(2));
-        $('#totalCost').css('background-color' , 'red');
+        $('#totalCost').css('background-color' ,'red');
     }
 }
 
@@ -58,12 +60,12 @@ function renderToDOM() {
     for (let employee of employeeInfo) {
         $('#employeeTable').append(`
             <tr>
-                <td>${employee.firsName}</td>
+                <td>${employee.firstName}</td>
                 <td>${employee.lastName}</td>
                 <td>${employee.employeeID}</td>
                 <td>${employee.employeeTitle}</td>
                 <td>$${employee.salary.toFixed(2)}</td>
-                <td><button>Delete</button></td>
+                <td><button id="deleteBtn">Delete</button></td>
             </tr>        
         `);
     }
@@ -76,4 +78,12 @@ function calculateTotalCost() {
     }
 
     return totalCost;
+}
+
+function deleteItem() {
+    console.log('in deleteItem');
+    console.log('this is '+ $(this));
+    
+    $(this).parent().parent().remove();
+    
 }

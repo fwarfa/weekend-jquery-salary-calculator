@@ -3,7 +3,7 @@ body {
     margin: 0;
 }
 
-form {
+#container {
     margin: 0 auto;
     width: 90%;
 }
@@ -63,6 +63,6 @@ input {
     font-size: 14px;
 }
 
-div {
+#monthly {
     text-align: right;
 }
