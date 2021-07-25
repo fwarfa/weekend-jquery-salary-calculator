@@ -8,13 +8,11 @@ $(document).ready(onReady);
 function onReady() {
     console.log('so ready!');
     $('#submitBtn').on('click', addItem);
-    $('#deleteBtn').on('click', deleteItem);
+    $(document).on('click', '.deleteBtn', deleteItem);
 }
 
 function addItem() {
     console.log('in addItem');
-
-    // event.preventDefault();
         
     // storing info into employee object
 
@@ -22,16 +20,19 @@ function addItem() {
 
     // Test
     console.log(`employee: ${employee.firstName}, ${employee.lastName}, ${employee.employeeID}, ${employee.employeeTitle}, ${employee.salary}`);
-
+    // Pushing employee info to array
     employeeInfo.push(employee);
-
+    // Test
     console.log(employeeInfo);
     
+    //clearing input and focusing cursor 
     $('input').val('');
     $('#firstName').focus();
 
+    //calling function that will rendor value to DOM
     renderToDOM();
 
+    // If value is over 20000 will highlight red
     let totalCost = calculateTotalCost();
     if (totalCost < 20000) {
         $('#totalCost').text(totalCost.toFixed(2));
@@ -65,7 +66,7 @@ function renderToDOM() {
                 <td>${employee.employeeID}</td>
                 <td>${employee.employeeTitle}</td>
                 <td>$${employee.salary.toFixed(2)}</td>
-                <td><button id="deleteBtn">Delete</button></td>
+                <td><button class="deleteBtn">Delete</button></td>
             </tr>        
         `);
     }
@@ -82,8 +83,8 @@ function calculateTotalCost() {
 
 function deleteItem() {
     console.log('in deleteItem');
-    console.log('this is '+ $(this));
-    
+
     $(this).parent().parent().remove();
-    
+    // This will not remove the specific row click only the last item on array
+    employeeInfo.pop();
 }
